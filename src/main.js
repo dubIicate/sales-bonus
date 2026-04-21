@@ -53,9 +53,17 @@ function analyzeSalesData(data, options) {
   ) {
     throw new Error("Некорректные входные данные");
   }
-  const { calculateRevenue, calculateBonus } = options;
 
   // @TODO: Проверка наличия опций
+  const { calculateRevenue, calculateBonus } = options;
+  if (
+    typeof calculateRevenue !== "function" ||
+    typeof calculateBonus !== "function"
+  ) {
+    throw new Error(
+      "Неправильный ввод calculateRevenue и calculateBonus",
+    );
+  }
 
   // @TODO: Подготовка промежуточных данных для сбора статистики
   const sellerStats = data.sellers.map((seller) => ({
